@@ -6,6 +6,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/maplestory_bold</item>
+    </style>
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/maplestory_light</item>
+    </style>
+    <style name="MineCustomTabText2" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">11sp </item>
+        <item name="android:fontFamily">@font/maplestory_light</item>
     </style>
 
 </resources>

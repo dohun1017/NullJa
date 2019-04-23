@@ -1,6 +1,7 @@
 package com.nullja.nullja;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +13,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TestPagerAdapter mTestPagerAdapter = new TestPagerAdapter(getSupportFragmentManager());
+        MainPagerAdapter mMainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         ViewPager mViewPager = (ViewPager)findViewById(R.id.view_pager);
-        mViewPager.setAdapter(mTestPagerAdapter);
+        mViewPager.setAdapter(mMainPagerAdapter);
 
         TabLayout mTab = (TabLayout) findViewById(R.id.main_Tab) ;
         mTab.setupWithViewPager(mViewPager);

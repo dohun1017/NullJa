@@ -17,7 +17,8 @@
         app:tabIndicatorColor="#ffffff"
         app:tabMode="fixed"
         app:tabSelectedTextColor="#000000"
-        app:tabTextColor="#ffffff">
+        app:tabTextColor="#ffffff"
+        app:tabTextAppearance="@style/MineCustomTabText">
 
         <android.support.design.widget.TabItem
             android:id="@+id/tab_최근"
