@@ -18,6 +18,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
@@ -25,8 +26,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * A simple {@link Fragment} subclass.
  */
 public class MapPage extends Fragment implements OnMapReadyCallback {
+    private GoogleMap mMap;
     MapView mapView = null;
     FragmentManager fragmentManager;
+
 
     public MapPage(){
 
@@ -41,6 +44,8 @@ public class MapPage extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.d("MapPage","시작");
+
+        //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager();
         View MapV = inflater.inflate(R.layout.fragment_map_page, container, false);
 
         fragmentManager = getFragmentManager();
@@ -114,6 +119,7 @@ public class MapPage extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
         Log.d("MapPage","onMapReady");
         MapsInitializer.initialize(this.getActivity());
 
@@ -122,10 +128,19 @@ public class MapPage extends Fragment implements OnMapReadyCallback {
 
         googleMap.animateCamera(cameraUpdate);
 
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(35.141233, 126.925594))
-                .title("루프리코리아"));
+        /*googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(37.26606602672905, 126.99985343949024))
+                .title("수원역"));*/
+        LatLng soowon = new LatLng(37.26606602672905,126.99985343949024);
+        mMap.addMarker(new MarkerOptions().position(soowon).title("수원역"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(soowon));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
 
-
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                
+            }
+        });
     }
 }
