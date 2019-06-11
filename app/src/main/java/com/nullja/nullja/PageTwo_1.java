@@ -55,7 +55,7 @@ public class PageTwo_1 extends Fragment {
         mdistance.add("30km");
 
         mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        mNames.add("Rocky Mountain National Park");
         mdistance.add("30km");
 
         mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");

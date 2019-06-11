@@ -6,7 +6,7 @@
         <!--<item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
-        <item name="colorPrimaryDark">#ffff</item>
+        <item name="colorPrimaryDark">#000</item>
         <item name="colorPrimary">#5DA4BE</item>
         <item name="android:fontFamily">@font/maplestory_bold</item>
 
