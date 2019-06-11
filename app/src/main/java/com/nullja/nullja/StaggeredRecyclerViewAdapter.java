@@ -26,12 +26,14 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
     private static final String TAG = "StaggeredRecyclerViewAd";
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<String> mContents = new ArrayList<>();
     private Context mContext;
 
-    public StaggeredRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls) {
+    public StaggeredRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> contents) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
+        mContents = contents;
     }
 
     @Override
@@ -52,6 +54,7 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
                 .into(holder.image);
 
         holder.name.setText(mNames.get(position));
+        holder.contents.setText(mContents.get(position));
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,8 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
                 Intent intent = new Intent(mContext, GalleryActivity.class);
                 intent.putExtra("image_url", mImageUrls.get(position));
                 intent.putExtra("image_name", mNames.get(position));
+                intent.putExtra("image_contents", mContents.get(position));
+
                 mContext.startActivity(intent);
             }
         });
@@ -76,11 +81,13 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
 
         public ImageView image;
         public TextView name;
+        public TextView contents;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.image = itemView.findViewById(R.id.imageview_widget);
             this.name = itemView.findViewById(R.id.name_widget);
+            this.contents = itemView.findViewById(R.id.contents_widget);
         }
     }
 }

@@ -34,17 +34,20 @@ public class GalleryActivity extends AppCompatActivity {
 
             String imageUrl = getIntent().getStringExtra("image_url");
             String imageName = getIntent().getStringExtra("image_name");
+            String imageContents = getIntent().getStringExtra("image_contents");
 
-            setImage(imageUrl, imageName);
+            setImage(imageUrl, imageName, imageContents);
         }
     }
 
 
-    private void setImage(String imageUrl, String imageName){
+    private void setImage(String imageUrl, String imageName, String imageContents){
         Log.d(TAG, "setImage: setting te image and name to widgets.");
 
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
+        TextView contents = findViewById(R.id.image_contents);
+        contents.setText(imageContents);
 
         ImageView image = findViewById(R.id.image);
         Glide.with(this)
