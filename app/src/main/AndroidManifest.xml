@@ -19,7 +19,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@@@API_KEY@@@"/>
+            android:value="AIzaSyBtj6ic4rIXBKUXjgBYMiGpp49WyAc__LY"/>
 
 
         <activity android:name=".MainActivity">
@@ -31,16 +31,13 @@
         </activity>
 
         <!-- 팝업 Activity -->
-        <activity android:name=".GalleryActivity"
-            tools:ignore="DuplicateActivity">
+        <activity android:name=".GalleryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>
