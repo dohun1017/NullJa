@@ -12,32 +12,60 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="밥집" />
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="밥집"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="카페" />
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="카페"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="포토존" />
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2.5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="포토존"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="박람회" />
+            android:layout_width="0dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="문화"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <FrameLayout

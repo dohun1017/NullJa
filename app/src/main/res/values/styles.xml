@@ -6,7 +6,7 @@
         <!--<item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>-->
-        <item name="colorPrimaryDark">#A1CDE1</item>
+        <item name="colorPrimaryDark">#ffff</item>
         <item name="colorPrimary">#5DA4BE</item>
         <item name="android:fontFamily">@font/maplestory_bold</item>
 
@@ -19,4 +19,7 @@
         <item name="android:fontFamily">@font/maplestory_light</item>
     </style>
 
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">20dp</item>
+    </style>
 </resources>
