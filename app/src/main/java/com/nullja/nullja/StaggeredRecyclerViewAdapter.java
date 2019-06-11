@@ -2,6 +2,7 @@ package com.nullja.nullja;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,9 +58,13 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
                 Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, GalleryActivity.class);
+                intent.putExtra("image_url", mImageUrls.get(position));
+                intent.putExtra("image_name", mNames.get(position));
+                mContext.startActivity(intent);
             }
         });
-
     }
 
     @Override

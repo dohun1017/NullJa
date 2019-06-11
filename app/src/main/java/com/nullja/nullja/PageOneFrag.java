@@ -39,7 +39,6 @@ public class PageOneFrag extends Fragment {
         return view;
     }
 
-
     private void initImageBitmaps(View view){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
