@@ -1,7 +1,6 @@
 package com.nullja.nullja;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -27,12 +25,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<String> mdistance = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images ) {
+    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> distance) {
         mImageNames = imageNames;
         mImages = images;
         mContext = context;
+        mdistance = distance;
     }
 
     @Override
@@ -53,7 +53,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.imageName.setText(mImageNames.get(position));
 
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+        holder.distance.setText(mdistance.get(position));
+
+        /*holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
@@ -65,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("image_name", mImageNames.get(position));
                 mContext.startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override
@@ -78,12 +80,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         CircleImageView image;
         TextView imageName;
+        TextView distance;
         RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             imageName = itemView.findViewById(R.id.image_name);
+            distance = itemView.findViewById(R.id.image_distance);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }

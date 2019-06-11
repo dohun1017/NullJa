@@ -46,7 +46,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
-        TextView contents = findViewById(R.id.image_contents);
+        TextView contents = findViewById(R.id.image_description_contents);
         contents.setText(imageContents);
 
         ImageView image = findViewById(R.id.image);
