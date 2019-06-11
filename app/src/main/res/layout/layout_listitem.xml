@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:padding="15dp"
     android:id="@+id/parent_layout"
-    android:background="#5DA4BE">
+    android:background="@drawable/border"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="80dp"
