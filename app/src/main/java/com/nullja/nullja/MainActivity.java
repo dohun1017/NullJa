@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
-    SQLiteDatabase DB;
+    public static SQLiteDatabase DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         mTab.setupWithViewPager(mViewPager);
 
         Log.i("MainActivity","DB open Or Create");
-        DB = openOrCreateDatabase(DataBase.DB_Name, MODE_PRIVATE, null);
+        DB = openOrCreateDatabase(DataBase.DB_Name, MODE_ENABLE_WRITE_AHEAD_LOGGING, null);
         if(DB==null){
             Log.w("MainActivity : ","DB 없음 오류");
         }else{

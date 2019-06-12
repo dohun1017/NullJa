@@ -3,6 +3,7 @@ package com.nullja.nullja;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,11 +26,11 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
 
     private static final String TAG = "StaggeredRecyclerViewAd";
     private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<byte[]> mImageUrls = new ArrayList<>();
     private ArrayList<String> mContents = new ArrayList<>();
     private Context mContext;
 
-    public StaggeredRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<String> imageUrls, ArrayList<String> contents) {
+    public StaggeredRecyclerViewAdapter(Context context, ArrayList<String> names, ArrayList<byte[]> imageUrls, ArrayList<String> contents) {
         mNames = names;
         mImageUrls = imageUrls;
         mContext = context;
@@ -60,7 +61,6 @@ public class StaggeredRecyclerViewAdapter extends RecyclerView.Adapter<Staggered
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on: " + mNames.get(position));
-                Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, GalleryActivity.class);
                 intent.putExtra("image_url", mImageUrls.get(position));

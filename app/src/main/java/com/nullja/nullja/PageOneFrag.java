@@ -1,6 +1,8 @@
 package com.nullja.nullja;
 
 
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,17 +14,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.Context.MODE_APPEND;
+import static android.content.Context.MODE_ENABLE_WRITE_AHEAD_LOGGING;
+import static android.content.Context.MODE_PRIVATE;
+import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
+import static com.nullja.nullja.MainActivity.DB;
+
 public class PageOneFrag extends Fragment {
 
     private static final String TAG = "MainActivity";
     private static final int NUM_COLUMNS = 2;
 
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<byte[]> mImageUrls = new ArrayList<>();
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mContents = new ArrayList<>();
 
@@ -42,42 +53,18 @@ public class PageOneFrag extends Fragment {
 
     private void initImageBitmaps(View view){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+        List<imageHotpl> hotplList = DataBase.getAllData(DB);
+        Integer size = hotplList.size();
+        Integer i=0;
 
-        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
-
-        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
-        mContents.add("aaaaaaaaaaaaaaaaaa");
+        while(i<size){
+            imageHotpl hp = hotplList.get(i);
+            mImageUrls.add(hp.hotplimage);
+            Log.i("DATA OK!! > ",hp.hotplname);
+            mNames.add(hp.hotplname);
+            mContents.add(hp.hotpladdr);
+            i++;
+        }
 
         initRecyclerView(view);
     }

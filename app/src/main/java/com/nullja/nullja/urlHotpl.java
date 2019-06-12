@@ -14,10 +14,22 @@ public class urlHotpl {
 }
 
 class imageHotpl {
+    Integer hotplnum;
     Integer hotplcat;
     String hotplname;
     String hotpladdr;
     Double hotplat;
     Double hotplon;
-    Bitmap hotplimage;
+    byte[] hotplimage;
+}
+
+class disHotpl {
+    Integer hotplnum;
+    Integer hotplcat;
+    String hotplname;
+    String hotpladdr;
+    Double hotplat;
+    Double hotplon;
+    byte[] hotplimage;
+    Double distance;
 }

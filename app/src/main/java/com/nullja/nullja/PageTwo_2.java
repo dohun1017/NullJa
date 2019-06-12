@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.nullja.nullja.MainActivity.DB;
 
 
 /**
@@ -21,7 +24,7 @@ public class PageTwo_2 extends Fragment {
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    private ArrayList<byte[]> mImageUrls = new ArrayList<>();
     private ArrayList<String> mdistance = new ArrayList<>();
 
     public void onCreate(Bundle savedInstanceState){
@@ -42,6 +45,21 @@ public class PageTwo_2 extends Fragment {
     private void initImageBitmaps(View view){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
+        //여기서 Category와 lat, lon을 현재 위치의 at와 on으로 수정하세요.
+        /*
+        List<disHotpl> hotplList = DataBase.setCategoryData(DB,1,2.3,4.5);
+        Integer size = hotplList.size();
+        Integer i=0;
+
+        while(i<size){
+            disHotpl hp = hotplList.get(i);
+            mImageUrls.add(hp.hotplimage);
+            Log.i("DATA OK!! > ",hp.hotplname);
+            mNames.add(hp.hotplname);
+            mdistance.add(Double.toString(hp.distance)+"km");
+            i++;
+        }*/
+        /*
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
         mNames.add("Havasu Falls");
         mdistance.add("30km");
@@ -77,6 +95,7 @@ public class PageTwo_2 extends Fragment {
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
         mNames.add("Washington");
         mdistance.add("30km");
+        */
 
         initRecyclerView(view);
     }

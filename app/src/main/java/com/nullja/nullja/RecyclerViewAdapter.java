@@ -24,11 +24,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<String> mImageNames = new ArrayList<>();
-    private ArrayList<String> mImages = new ArrayList<>();
+    private ArrayList<byte[]> mImages = new ArrayList<>();
     private ArrayList<String> mdistance = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> distance) {
+    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<byte[]> images, ArrayList<String> distance) {
         mImageNames = imageNames;
         mImages = images;
         mContext = context;

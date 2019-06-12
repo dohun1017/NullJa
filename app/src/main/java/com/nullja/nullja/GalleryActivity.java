@@ -1,5 +1,7 @@
 package com.nullja.nullja;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +34,8 @@ public class GalleryActivity extends AppCompatActivity {
         if(getIntent().hasExtra("image_url") && getIntent().hasExtra("image_name")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
 
-            String imageUrl = getIntent().getStringExtra("image_url");
+            byte[] imageUrl = getIntent().getByteArrayExtra("image_url");
+//                    getStringExtra("image_url");
             String imageName = getIntent().getStringExtra("image_name");
             String imageContents = getIntent().getStringExtra("image_contents");
 
@@ -41,7 +44,12 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
 
-    private void setImage(String imageUrl, String imageName, String imageContents){
+    public static Bitmap byteArrayToBitmap(byte[] $byteArray) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray( $byteArray, 0, $byteArray.length ) ;
+        return bitmap ;
+    }
+
+    private void setImage(byte[] imageUrl, String imageName, String imageContents){
         Log.d(TAG, "setImage: setting te image and name to widgets.");
 
         TextView name = findViewById(R.id.image_description);
@@ -50,10 +58,13 @@ public class GalleryActivity extends AppCompatActivity {
         contents.setText(imageContents);
 
         ImageView image = findViewById(R.id.image);
-        Glide.with(this)
+
+        image.setImageBitmap(byteArrayToBitmap(imageUrl));
+
+        /*Glide.with(this)
                 .asBitmap()
                 .load(imageUrl)
-                .into(image);
+                .into(image);*/
     }
 
 }
