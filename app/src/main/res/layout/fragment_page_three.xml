@@ -28,7 +28,9 @@
             android:layout_weight="1.5"
             android:layout_height="wrap_content"
             android:background="@drawable/buttonshape"
-            android:layout_margin="3dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="6dp"
             android:textSize="18sp"
             android:text="검색" />
     </LinearLayout>
