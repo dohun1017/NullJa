@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,22 +9,30 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/border2"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
             android:hint="주소를 입력후 검색버튼을 누르면 주소주변 검색"
-            android:textSize="12dp"
-            android:layout_marginLeft="2dp"/>
+            android:textSize="16dp" />
+
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
             android:layout_height="wrap_content"
-            android:text="검색"/>
+            android:background="@drawable/buttonshape"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="6dp"
+            android:textSize="18sp"
+            android:text="검색" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,6 +46,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:background="@drawable/border2"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.3"
+            android:entries="@array/city"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editText11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:hint="장소이름 작성"
+            android:paddingTop="5dp"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:text="등록"
+            android:textSize="18sp" />
     </LinearLayout>
 
 
