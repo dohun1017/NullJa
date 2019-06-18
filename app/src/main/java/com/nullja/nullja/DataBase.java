@@ -1,0 +1,175 @@
+package com.nullja.nullja;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.android.gms.tasks.Task;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+public class DataBase {
+    public static String DB_Name = "NullJa_DB"; //DB명
+    public static String Table_Name = "hotpl";
+
+    public static void createTable(SQLiteDatabase db) {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS " + Table_Name
+                + "("
+                + " hotplnum integer PRIMARY KEY autoincrement, "
+                + " hotplcat integer, "
+                + " hotplname text, "
+                + " hotpladdr text, "
+                + " hotplat real, hotplon real, "
+                + " hotplimage blob);"; //테이블 생성문
+
+        Log.i("DataBase.createTable","실행");
+        db.execSQL(createTableSQL);
+    }
+
+    public static List<imageHotpl> getAllData(SQLiteDatabase db) {
+        Log.i("DataBase.getAllData","실행");
+        String getAllDataSQL = "SELECT * FROM "+Table_Name+" ORDER BY hotplnum DESC";
+
+        Cursor cursor = null;
+        cursor=db.rawQuery(getAllDataSQL, null);
+        if(cursor==null)
+            Log.i("LOOK!! > ","CURSOR IS NULL");
+        List<imageHotpl> hotplList = new ArrayList<imageHotpl>();
+        //cursor.moveToFirst();
+
+
+        while(cursor.moveToNext()){
+            imageHotpl hotpl = new imageHotpl();
+            Log.i("LOOK!! > ",cursor.getString(2));
+            hotpl.hotplnum=cursor.getInt(0);
+            hotpl.hotplcat=cursor.getInt(1);
+            hotpl.hotplname=cursor.getString(2);
+            hotpl.hotpladdr=cursor.getString(3);
+            hotpl.hotplat=cursor.getDouble(4);
+            hotpl.hotplon=cursor.getDouble(5);
+            hotpl.hotplimage= cursor.getBlob(6);
+
+            hotplList.add(hotpl);
+        }
+
+        return hotplList;
+    }
+
+    public static List<disHotpl> setCategoryData(SQLiteDatabase db,Integer Category, Double lat, Double lon) {
+        Log.i("DataBase.setCategord","실행");
+        String getAllDataSQL = "SELECT FROM *, (6371*acos(cos(radians("+lat+"))*cos(radians(hotplat))*cos(radians(hotplon)-" +
+                "radians("+lon+"))+sin(radians("+lat+"))*sin(radians(hotplat)))) AS distance FROM "+Table_Name+" WHERE hotplcat="+Category+" HAVING distance <=2 ORDER BY distance LIMIT 0,300";
+
+        Cursor cursor = null;
+        cursor=db.rawQuery(getAllDataSQL, null);
+        if(cursor==null)
+            Log.i("LOOK!! > ","CURSOR IS NULL");
+        List<disHotpl> hotplList = new ArrayList<disHotpl>();
+        //cursor.moveToFirst();
+
+
+        while(cursor.moveToNext()){
+            disHotpl hotpl = new disHotpl();
+
+            hotpl.hotplnum=cursor.getInt(0);
+            hotpl.hotplcat=cursor.getInt(1);
+            hotpl.hotplname=cursor.getString(2);
+            hotpl.hotpladdr=cursor.getString(3);
+            hotpl.hotplat=cursor.getDouble(4);
+            hotpl.hotplon=cursor.getDouble(5);
+            hotpl.hotplimage= cursor.getBlob(6);
+            hotpl.distance=cursor.getDouble(cursor.getColumnIndex("distance"));
+            Log.i("LOOK!! > ",Double.toString(hotpl.distance));
+
+            hotplList.add(hotpl);
+        }
+
+        return hotplList;
+    }
+
+
+    public static void insertData(SQLiteDatabase db, urlHotpl hotpl){
+        String insertDataSQL = "INSERT INTO " + Table_Name
+                +" (hotplcat, hotplname, hotpladdr, hotplat, hotplon, hotplimage)VALUES (?, ?, ?, ?, ?, ?);";
+        Integer hotplcat=hotpl.hotplcat;
+        String hotplname=hotpl.hotplname;
+        String hotpladdr=hotpl.hotpladdr;
+        Double hotplat=hotpl.hotplat;
+        Double hotplon=hotpl.hotplon;
+        String hotplimage=hotpl.hotplimage;
+
+        SQLiteStatement insertState = db.compileStatement(insertDataSQL);
+        insertState.bindDouble(1, hotplcat);
+        insertState.bindString(2, hotplname);
+        insertState.bindString(3, hotpladdr);
+        insertState.bindDouble(4,hotplat);
+        insertState.bindDouble(5, hotplon);
+        insertState.bindBlob(6, urlToBlob(hotplimage));
+        insertState.executeInsert();
+
+        Log.i("DataBase.insertData","실행됨");
+    }
+
+    private static byte[] urlToBlob(String URL){
+        byte[] rdt=null;
+
+        task tk = new task();
+        try {
+            rdt = tk.execute(URL).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return rdt;
+    }
+
+}
+
+class task extends AsyncTask<String, Void, byte[]> {
+    @Override
+    protected byte[] doInBackground(String... params){
+
+        try {
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] data = new byte[50];
+
+            URL url = new URL(params[0]);
+            HttpURLConnection con = null;
+
+            con = (HttpURLConnection)url.openConnection();
+            InputStream is = con.getInputStream();
+
+            BufferedInputStream bis = new BufferedInputStream(is);
+            int current = 0;
+            while ((current = bis.read(data,0,data.length)) != -1) {
+                buffer.write(data,0, current);
+            }
+            return buffer.toByteArray();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+}

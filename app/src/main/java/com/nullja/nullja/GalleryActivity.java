@@ -1,0 +1,70 @@
+package com.nullja.nullja;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+/**
+ * Created by User on 1/2/2018.
+ */
+
+public class GalleryActivity extends AppCompatActivity {
+
+    private static final String TAG = "GalleryActivity";
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_gallery);
+        Log.d(TAG, "onCreate: started.");
+
+        getIncomingIntent();
+    }
+
+    private void getIncomingIntent(){
+        Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
+
+        if(getIntent().hasExtra("image_url") && getIntent().hasExtra("image_name")){
+            Log.d(TAG, "getIncomingIntent: found intent extras.");
+
+            byte[] imageUrl = getIntent().getByteArrayExtra("image_url");
+//                    getStringExtra("image_url");
+            String imageName = getIntent().getStringExtra("image_name");
+            String imageContents = getIntent().getStringExtra("image_contents");
+
+            setImage(imageUrl, imageName, imageContents);
+        }
+    }
+
+
+    public static Bitmap byteArrayToBitmap(byte[] $byteArray) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray( $byteArray, 0, $byteArray.length ) ;
+        return bitmap ;
+    }
+
+    private void setImage(byte[] imageUrl, String imageName, String imageContents){
+        Log.d(TAG, "setImage: setting te image and name to widgets.");
+
+        TextView name = findViewById(R.id.image_description);
+        name.setText(imageName);
+        TextView contents = findViewById(R.id.image_description_contents);
+        contents.setText(imageContents);
+
+        ImageView image = findViewById(R.id.image);
+
+        image.setImageBitmap(byteArrayToBitmap(imageUrl));
+
+        /*Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .into(image);*/
+    }
+
+}
